@@ -113,11 +113,13 @@ App.ApplicationController = Ember.Controller.extend({
       }.bind(this));
     }
   },
+  
+  state: null,
 
-  states: [{label: 'Utah', id: 'UT'}, {label: 'Illinois', id: 'IL'}],
+  states: [{name: 'Utah', id: 'UT'}, {name: 'Illinois', id: 'IL'}],
+  filteredStates: Ember.computed.defaultTo('states'),
 
   filterStatesBy: function(term) {
-    var term = this.get('stateFilterTerm');
     if (term == '') return this.get('states');
     var filter = new RegExp('^'+term, 'i');
     return this.get('states').filter(function(state) {
